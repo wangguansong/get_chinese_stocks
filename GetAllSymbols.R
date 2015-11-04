@@ -38,8 +38,13 @@ code.list <-
     as.character(1399000L + 1:998))      # ShenZhen Idx
 
 for (i in code.list[1:10]) {
-  destfile <- paste(dir, "/", i, ".csv", sep="")
-  GetSymbols.netease(code=i, savefile=destfile, loadname=NA,
+  if (substr(i, 1, 1)=="0") {
+    codename <- paste("SH", substr(i, 2, 7), sep="")
+  } else if (substr(code, 1, 1)=="1"){
+    codename <- paste("SZ", substr(i, 2, 7), sep="")
+  }
+  destfile <- paste(dir, "/", codename, ".csv", sep="")
+  GetSymbols.netease(code=i, savefile=destfile, dfname=NA,
                      translate=TRUE, quiet=TRUE)
 
   linecount <- system(paste("wc -l", destfile, sep=" "), intern=TRUE)
@@ -48,15 +53,11 @@ for (i in code.list[1:10]) {
     file.remove(destfile)
     next
   }
-  if (substr(i, 1, 1)=="0") {
-    dfname <- paste("SH", substr(i, 2, 7), sep="")
-  } else if (substr(i, 1, 1)=="1") {
-    dfname <- paste("SZ", substr(i, 2, 7), sep="")
-  }
+
   CleanSymbols.netease(destfile, gsub("csv", "RData", destfile),
-                       savedfname=dfname, translate=FALSE)
+                       dfname=codename, translate=FALSE)
   file.remove(destfile)
 
 }
 
-remove(destfile, dir, i, linecount)
+remove(destfile, dir, i, linecount, codename)

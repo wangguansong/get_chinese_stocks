@@ -1,27 +1,30 @@
-CleanSymbols.netease <- function(filename, savefile, savedfname,
+CleanSymbols.netease <- function(x, savefile, dfname,
                          translate=FALSE, checktype=TRUE,
                          checkcode=TRUE, checkdate=TRUE) {
   # Clean the csv file of the daily returns of a stock of Shanghai or
   # Shenzhen market.
   # Args:
-  #   filename: a dataframe or path to a csv file.
-  #   savefile: a string. If given, save to a RData file or a csv file
-  #       depending on extension. If no extension, save to RData.
-  #       If missing, will not save.
-  #   savedfname: a string. If given, use as the name of data frame in
-  #       the RData. If missing, use the savefile basename starting with
-  #       an "S".
+  #   x: a data frame or path to a csv file. 
+  #   savefile: a string, the path to save the cleaned dadta. The
+  #       function will recognize "csv" and "RData" extensions. If it is
+  #       not given (missing), overwrite the original file if x is a
+  #       path or no file will be created. If is is "NA", no file will
+  #       be created.
+  #   dfname: a string, the data frame name if saved to RData. If it is
+  #       not given (missing) or it is "NA", it is created from the
+  #       savefile. If the savefile opens with a number, it is set to
+  #       "dailyprices".
   #   translate: a boolean. If TRUE, translate the column name to En.
   #   checktype: a boolean. If TRUE, check the type of each column.
   #   checkcode: a boolean. If TRUE, delete the ' character in code.
   #   checkdate: a boolean. If TRUE, convert DATE column into POSIT
   #       format and sort from old to new.
 
-  if (is.character(filename)) {
-    tempdf <- read.csv(filename, stringsAsFactors=FALSE,
+  if (is.character(x)) {
+    tempdf <- read.csv(x, stringsAsFactors=FALSE,
                        na.strings=c("None", "NA", ""))
   } else {
-    tempdf <- filename
+    tempdf <- x
   }
 
   # Transalte column names
@@ -59,7 +62,7 @@ CleanSymbols.netease <- function(filename, savefile, savedfname,
     tempdf[, numcol] <- sapply(tempdf[, numcol], as.numeric)
     factorcol <- which(colnames(tempdf) %in%
       c("股票代码", "CODE", "名称", "NAME"))
-    sapply(tempdf[, factorcol], as.factor)
+    tempdf[, factorcol] <- sapply(tempdf[, factorcol], as.factor)
   }
 
 
@@ -74,21 +77,40 @@ CleanSymbols.netease <- function(filename, savefile, savedfname,
   }
 
   # Save or Return
-  if (!missing(savefile)) {
-    namesplitted <- strsplit(basename(savefile), "\\.")[[1]]
-    extname <- namesplitted[length(namesplitted)]
-    if (missing(savedfname)) {
-      savedfname <- paste(c("S", namesplitted[-length(namesplitted)]),
-                          collapse="")
-    }
-    if (extname %in% c("CSV", "csv")) {
-      write.csv(tempdf, file=savefile, fileEncoding="utf-8")
-    } else if (extname %in% c("RData", "rdata", "RDATA")) {
-      assign(savedfname, tempdf)
-      save(list=savedfname, file=savefile)
+  if (missing("savefile")) {
+    if (is.character(x)) {
+      savefile <- x
     } else {
-      assign(savefile, tempdf)
-      save(list=savefile, file=paste(savefile, ".RData", sep=""))
+      savefile <- NA
+    }
+  }
+  
+  if (!is.na(savefile)) {
+    savefilesplit <- strsplit(basename(savefile), "\\.")[[1]]
+    if (length(savefilesplit)==1) {
+      savebext <- "RData"
+      savebase <- savefilesplit
+    } else if (length(savefilesplit)>1) {
+      saveext <- savefilesplit[length(savefilesplit)]
+      savebase <- paste(savefilesplit[-length(savefilesplit)],
+                        collapse=".")
+    }
+    
+    if (missing(dfname) || is.na(dfname)) {
+      if (substr(savebase, 1, 1) %in% as.character(0:9)) {
+        dfname <- "dailyprices"
+      } else {
+        dfname <- savebase
+      }
+    }
+    
+    if (saveext %in% c("CSV", "csv")) {
+      write.csv(tempdf, file=savefile, fileEncoding="utf-8")
+    } else if (saveext %in% c("RData", "rdata", "RDATA")) {
+      assign(dfname, tempdf)
+      save(list=dfname, file=savefile)
+    } else {
+      stop(paste("Cannot save to", saveext, "format"))
     }
   }
 
