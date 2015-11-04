@@ -1,5 +1,5 @@
 GetSymbols.netease <- function(code, from, to, market,
-                               savefile=NA, dfname,
+                               savefile, dfname,
                                quiet=TRUE, translate=TRUE,
                                fields=c("TCLOSE", "HIGH", "LOW", "TOPEN",
                                         "LCLOSE", "CHG", "PCHG",

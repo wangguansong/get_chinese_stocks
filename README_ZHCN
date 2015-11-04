@@ -1,0 +1,44 @@
+用于下载和清理上海和深圳股票以及指数的每日价格和每日之内交易明细价格。
+数据来自于网易财经（http://money.163.com）
+程序和变量名参考quantmod包。
+这些程序只在Ubuntu14.04系统下测试过。
+
+GetSymbols(HF).netease.R
+    下载每日（明细）价格，然后保存在文件或者载入到R空间中。
+CleanSymbols(HF).netease.R
+    清理下载的数据。
+GetAllSymbols(HF).R
+    自动下载所有的股票和指数数据。
+
+用法例：
+
+  - 下载上证综合指数每日历史价格（从最早日期到今天），保存到csv文件，然后载入到R空间中。
+    以下写法效果相同：
+      GetSymbols.netease("0000001")
+      GetSymbols.netease("000001", market="Shanghai")
+      GetSymbols.netease("0000001", savefile="SH000001.csv",
+                         dfname="SH000001")
+  - 仅载入下载数据，不保存文件：
+      GetSymbols.netease("0000001", savefile=NA)
+  - 仅保存文件，不载入数据：
+      GetSymbols.netease("0000001", dfname=NA)
+  - 保存中文变量名
+      GetSymbols.netease("0000001", translate=FALSE)
+
+  - 下载上证综合指数在2015年11月2日的交易明细，保存到xls文件：
+      GetSymbols.netease("0000001", "20151102")
+      GetSymbols.netease("0000001", "20151102",
+                         savefile="SH000001_20151102.xls")
+
+  - 清理"SH000001.csv"文件中的历史每日价格, 然后覆盖该文件:
+      CleanSymbols.netease("SH000001.csv")
+      CleanSymbols.netease("SH000001.csv", savefile="SH000001.csv")
+  - 清理"SH000001.csv"文件中的历史每日价格，保存到RData文件：
+      CleanSymbols.netease("SH000001.csv", savefile="SH000001.RData")
+      CleanSymbols.netease("SH000001.csv", savefile="SH000001.RData",
+                           dfname="SH000001")
+
+  - 转换并清理"SH000001_20151102.xls"文件，保存到RData文件：
+      CleanSymbolsHF.netease("SH000001_20151102.xls",
+                             savefile="a_name_you_like.RData",
+                             dfname="notsobigdata")

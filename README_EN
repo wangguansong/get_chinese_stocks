@@ -1,0 +1,51 @@
+R functions to download and clean daily and intra-daily prices of stocks
+and indices on Shanghai and Shenzhen markets.
+The data are from Netease(http://money.163.com).
+The names of functions are inspired by quantmod package.
+I only tested in Ubuntu 14.04.
+
+GetSymbols(HF).netease.R
+    Download (intra-)daily prices of a symbol/code, then save to a file
+    or load to the parent environment.
+CleanSymbols(HF).netease.R
+    Clean the downloaded prices.
+GetAllSymbols(HF).R
+    A script to automatically download and clean (intra-)daily prices
+    of all symbols/codes.
+
+EXAMPLE:
+
+  - To download daily prices of Shanghai Composite Index, save to
+    "SH000001.csv", and load to environment with name "SH000001", from
+    the earliest record to today, the following codes are equivalent:
+      GetSymbols.netease("0000001")
+      GetSymbols.netease("000001", market="Shanghai")
+      GetSymbols.netease("0000001", savefile="SH000001.csv",
+                         dfname="SH000001")
+  - To only load the data without saving to a file:
+      GetSymbols.netease("0000001", savefile=NA)
+  - To only save the data to a file without loading it:
+      GetSymbols.netease("0000001", dfname=NA)
+  - To keep the chinese column names:
+      GetSymbols.netease("0000001", translate=FALSE)
+
+  - To download intra-daily prices of Shanghai Composite Index of the
+    day of 2015/11/02, save to "SH000001_20151102.xls":
+      GetSymbols.netease("0000001", "20151102")
+      GetSymbols.netease("0000001", "20151102",
+                         savefile="SH000001_20151102.xls")
+
+  - To clean the daily prices of file "SH000001.csv", then overwrite it:
+      CleanSymbols.netease("SH000001.csv")
+      CleanSymbols.netease("SH000001.csv", savefile="SH000001.csv")
+  - To clean the daily prices of file "SH000001.csv", then save to
+    RData, with data frame named as "SH000001":
+      CleanSymbols.netease("SH000001.csv", savefile="SH000001.RData")
+      CleanSymbols.netease("SH000001.csv", savefile="SH000001.RData",
+                           dfname="SH000001")
+
+  - To clean the intra-daily prices of file "SH000001_20151102.xls",
+    then save it to an RData, with data frame named as "notsobigdata":
+      CleanSymbolsHF.netease("SH000001_20151102.xls",
+                             savefile="a_name_you_like.RData",
+                             dfname="notsobigdata")
