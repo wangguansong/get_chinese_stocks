@@ -5,7 +5,7 @@
 #   - set CODE and NAME column as factors
 #   - set price columns as numeric
 #   - format DATE as POSIT date
-#   - save to RData, dataframe named as "SH" or "SZ" folloed by code.
+#   - save to RData
 # Codes:
 #   ShangHai A Shares     0600000 ~ 0601999
 #                         0603000 ~ 0603998
@@ -37,7 +37,7 @@ code.list <-
     as.character(1200000L + 11:992),     # ShenZhen B
     as.character(1399000L + 1:998))      # ShenZhen Idx
 
-for (i in code.list[1:10]) {
+for (i in code.list) {
   if (substr(i, 1, 1)=="0") {
     codename <- paste("SH", substr(i, 2, 7), sep="")
   } else if (substr(code, 1, 1)=="1"){

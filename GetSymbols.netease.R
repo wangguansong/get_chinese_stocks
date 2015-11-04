@@ -120,4 +120,7 @@ GetSymbols.netease <- function(code, from, to, market,
   invisible(codename)
 }
 
-
+inputs <- commandArgs(trailingOnly=TRUE)
+if (length(inputs)==1) {
+  GetSymbols.netease(x=inputs[1])
+}

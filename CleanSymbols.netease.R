@@ -117,3 +117,8 @@ CleanSymbols.netease <- function(x, savefile, dfname,
   invisible(tempdf)
 
 }
+
+inputs <- commandArgs(trailingOnly=TRUE)
+if (length(inputs)==1) {
+  CleanSymbols.netease(x=inputs[1])
+}
