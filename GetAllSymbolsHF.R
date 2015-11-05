@@ -50,7 +50,7 @@ for (d in dates) {
   datedir <- paste(dir, "/", d, sep="")
   if (! dir.exists(datedir)) dir.create(datedir)
 
-  for (i in code.list[1:10]) {
+  for (i in code.list) {
     if (substr(i, 1, 1)=="0") {
       codename <- paste("SH", substr(i, 2, 7), "_", d, sep="")
     } else if (substr(i, 1, 1)=="1"){
