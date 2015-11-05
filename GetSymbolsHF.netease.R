@@ -85,9 +85,3 @@ GetSymbolsHF.netease <- function(code, date, market,
   invisible(code)
 
 }
-
-
-inputs <- commandArgs(trailingOnly=TRUE)
-if (length(inputs)==1) {
-  GetSymbolsHF.netease(x=inputs[1])
-}
