@@ -40,7 +40,7 @@ code.list <-
 for (i in code.list) {
   if (substr(i, 1, 1)=="0") {
     codename <- paste("SH", substr(i, 2, 7), sep="")
-  } else if (substr(code, 1, 1)=="1"){
+  } else if (substr(i, 1, 1)=="1"){
     codename <- paste("SZ", substr(i, 2, 7), sep="")
   }
   destfile <- paste(dir, "/", codename, ".csv", sep="")

@@ -66,6 +66,8 @@ GetSymbolsHF.netease <- function(code, date, market,
     cat(paste("Got intradaily prices of", codename))
   } else {
     cat(paste("Fail to get intradaily prices of", codename))
+    cat(".\n")
+    return(invisible())
   }
   
   if (missing("savefile")) {

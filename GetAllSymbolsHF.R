@@ -24,7 +24,12 @@
 ## setup
 source("GetSymbolsHF.netease.R")
 source("CleanSymbolsHF.netease.R")
-dates <- "20151102"
+inputs <- commandArgs(trailingOnly=TRUE)
+if (length(inputs)==1) {
+  dates <- inputs
+} else {
+  dates <- "20151102"
+}
 dir <- "stockfiles"
 if (! dir.exists(dir)) dir.create(dir)
 
@@ -48,7 +53,7 @@ for (d in dates) {
   for (i in code.list[1:10]) {
     if (substr(i, 1, 1)=="0") {
       codename <- paste("SH", substr(i, 2, 7), "_", d, sep="")
-    } else if (substr(code, 1, 1)=="1"){
+    } else if (substr(i, 1, 1)=="1"){
       codename <- paste("SZ", substr(i, 2, 7), "_", d, sep="")
     }
 
@@ -63,3 +68,5 @@ for (d in dates) {
     }
   }
 }
+
+remove(cleanfile, codename, d, datedir, destfile, dir, i, inputs)
