@@ -1,6 +1,6 @@
 GetFinancialInfo.netease <-
   function(code, savefile, dfname,
-           translate=FALSE, clean=TRUE, type="lrb", quiet=TRUE) {
+           translate=FALSE, clean=TRUE, type="zcfzb", quiet=TRUE) {
 
   # Make code into 6 digits if it's not
   if (nchar(code) < 6) {
@@ -101,6 +101,8 @@ GetFinancialInfo.netease <-
     colnames(tempdf) <- header
     rownames(tempdf) <- NULL
     tempdf[, -1] <- sapply(tempdf[, -1], as.numeric)
+    tempdf[, 1] <- as.Date(as.character(tempdf[, 1]),
+                           format="%Y-%m-%d")
 
     cat(", cleaned")
     if (!is.na(savefile)) {
