@@ -52,8 +52,10 @@ GetFinancialInfo.netease <-
   if (dlflag==0) {
     cat(paste("Got information of", code))
   } else {
-    file.remove(savefile)
+    file.remove(dltmp)
     cat(paste("Failed to get information of", code))
+    cat(".\n")
+    return(invisible(codename))
   }
 
   # Save file or load data
