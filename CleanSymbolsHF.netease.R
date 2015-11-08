@@ -16,6 +16,8 @@ CleanSymbolsHF.netease <- function(x, savefile, dfname,
   #       not given (missing) or it is "NA", it is created from the
   #       savefile. If the savefile opens with a number, it is set to
   #       "intradailyprices".
+  #   method: a string, the method to convert xls to csv. For now, there
+  #       are "unoconv", "gdata", and "libreoffice".
   #   translate: a boolean. If TRUE, translate the column name to En.
   #   checktype: a boolean. If TRUE, check the type of each column.
   #   roundchg" a boolean. If TRUE, round the CHG column into 2 digits
@@ -47,6 +49,12 @@ CleanSymbolsHF.netease <- function(x, savefile, dfname,
       } else if (method=="gdata"){
         require("gdata")
         tempdf <- read.xls(x, method="csv")
+      } else if (method=="libreoffice") {
+        system(paste("libreoffice --headless --convert-to csv", x))
+        tempdf <- read.csv(gsub("(xls|XLS)$", "csv", x),
+                           stringsAsFactors=FALSE,
+                           na.strings=c("None", "NA", ""),
+                           fileEncoding="utf-8")
       }
     }
   }

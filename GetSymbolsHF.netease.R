@@ -77,7 +77,7 @@ GetSymbolsHF.netease <- function(code, date, market,
   if (is.na(savefile)) {
     cat(", and nothing is done")
   } else {
-    file.copy(dltmp, savefile)
+    file.copy(dltmp, savefile, overwrite=TRUE)
     cat(paste(", saved to", savefile))
   }
   cat(".\n")
