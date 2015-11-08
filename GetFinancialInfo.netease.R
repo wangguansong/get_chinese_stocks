@@ -1,6 +1,27 @@
 GetFinancialInfo.netease <-
   function(code, savefile, dfname,
            translate=FALSE, clean=TRUE, type="zcfzb", quiet=TRUE) {
+  # Download financial statement tables of a stock.
+  # netease
+  #
+  #   code: a numeric code of the stock. It can be 6 digits, or it can
+  #       be 7 digits where the first of which indicates the market:
+  #         0   Shanghai
+  #         1   Shenzhen
+  #       If the code has less than 6 digits, it's prefixed with 0's.
+  #   savefile: a string, the path to save the data in csv format. If it
+  #       is not given (missing), use (SH/SZ)+(6 digits).csv. If it is
+  #       set to "NA", no file will be created.
+  #   dfname: a string, the name of the data frame to be loaded into
+  #       the environment. If it is not given (missing), it is set to
+  #       (SH/SZ)+(6 digits). If it is set to "NA", the data will not be
+  #       loaded.
+  #   type: a string, valued as "cwbbzy", "zcfzb", "lrb", "xjllb",
+  #       "zycwzb", "ylnl", "chnl", "cznl", or "yynl". It controls which
+  #       table to download.
+  #   clean: a boolean. TRUE to clean the downloaded data.
+  #   translate: a boolean. TRUE to translate column names to english.
+  #   quiet: a boolean, passed to download.file(...).
 
   # Make code into 6 digits if it's not
   if (nchar(code) < 6) {
