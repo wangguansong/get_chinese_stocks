@@ -28,7 +28,7 @@ if (! dir.exists(dir)) dir.create(dir)
 # list of the codes
 code.list <-
   c(paste("0", as.character(600000L + 0:1999), sep=""),  # ShangHai A
-    paste("0", as.character(603000L + 0:3998), sep=""),
+    paste("0", as.character(603000L + 0:998), sep=""),
     paste("0", as.character(900900L + 1:57), sep=""),    # ShangHai B
     substr(as.character(10000000L + c(1:162, 300, 801:999)), 2, 8),
                                                          # ShangHai Idx
