@@ -34,14 +34,14 @@ GetFinancialInfo.netease <-
     table <- "zycwzb"
   }
   if (is.na(part)) {
-    link=paste("http://quotes.money.163.com/service/", table, "_", code,
-               ".html", sep="")
+    link <- paste("http://quotes.money.163.com/service/", table, "_",
+                  code, ".html", sep="")
   } else if (part=="zycwzb") {
-    link=paste("http://quotes.money.163.com/service/", table, "_", code,
-               ".html?type=report", sep="")
+    link <- paste("http://quotes.money.163.com/service/", table, "_",
+                  code, ".html?type=report", sep="")
   } else {
-    link=paste("http://quotes.money.163.com/service/", table, "_", code,
-               ".html?type=report&part=", part, sep="")
+    link <- paste("http://quotes.money.163.com/service/", table, "_",
+                  code, ".html?type=report&part=", part, sep="")
   }
 
   # Download link to a temporary file
@@ -97,7 +97,9 @@ GetFinancialInfo.netease <-
       tempdf <- tempdf[, -which(header=="")]
     }
     header <- tempdf[1, ]
-    tempdf <- data.frame(tempdf[-1, ], stringsAsFactors=FALSE)
+    # convert to matrix, to avoid bug in one row case
+    tempdf <- data.frame(matrix(tempdf[-1, ], ncol=length(header)),
+                         stringsAsFactors=FALSE)
     colnames(tempdf) <- header
     rownames(tempdf) <- NULL
     tempdf[, -1] <- sapply(tempdf[, -1], as.numeric)

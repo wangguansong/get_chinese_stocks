@@ -39,7 +39,7 @@ code.list <-
 type.list <- c("cwbbzy", "zcfzb", "lrb", "xjllb",
                "zycwzb", "ylnl", "chnl", "cznl", "yynl")
 
-for (i in code.list[6:10]) {
+for (i in code.list) {
   if (substr(i, 1, 1)=="0") {
     codename <- paste("SH", substr(i, 2, 7), sep="")
   } else if (substr(i, 1, 1)=="1"){
