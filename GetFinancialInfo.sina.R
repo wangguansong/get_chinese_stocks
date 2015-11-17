@@ -1,6 +1,6 @@
 GetFinancialInfo.sina <-
   function(code, savefile, dfname,
-           translate=FALSE, clean=TRUE, type="lrb", quiet=TRUE) {
+           translate=FALSE, clean=TRUE, type="zcfzb", quiet=TRUE) {
   # Download financial statement tables of a stock.
   # sina
   #
@@ -111,7 +111,9 @@ GetFinancialInfo.sina <-
       tempdf <- tempdf[, -which(header=="")]
     }
     header <- tempdf[1, ]
-    tempdf <- data.frame(tempdf[-1, ], stringsAsFactors=FALSE)
+    # convert to matrix, to avoid bug in one row case
+    tempdf <- data.frame(matrix(tempdf[-1, ], ncol=length(header)),
+                         stringsAsFactors=FALSE)
     colnames(tempdf) <- header
     rownames(tempdf) <- NULL
     tempdf[, -(1:2)] <- sapply(tempdf[, -(1:2)], as.numeric)
