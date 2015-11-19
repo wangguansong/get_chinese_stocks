@@ -8,22 +8,12 @@
 #   - convert TIME into seconds over midnight
 #   - save to RData
 #   - delete original xls files and skip empty files
-# Codes:
-#   ShangHai A Shares     0600000 ~ 0601999
-#                         0603000 ~ 0603998
-#   ShangHai B Shares     0900901 ~ 0900957
-#   ShangHai Indices      0000001 ~ 0000162
-#                         0000300
-#                         0000801 ~ 0000999
-#   ShenZhen A Shares     1000001 ~ 1002783
-#                         1300001 ~ 1300498
-#   ShenZhen B Shares     1200011 ~ 1200992
-#   ShenZhen Indices      1399001 ~ 1399998
 
 
 ## setup
 source("GetSymbolsHF.netease.R")
 source("CleanSymbolsHF.netease.R")
+source("GenCodeList.R")
 inputs <- commandArgs(trailingOnly=TRUE)
 if (length(inputs)==1) {
   dates <- inputs
