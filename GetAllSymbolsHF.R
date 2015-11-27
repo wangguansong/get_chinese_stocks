@@ -18,7 +18,7 @@ inputs <- commandArgs(trailingOnly=TRUE)
 if (length(inputs)==1) {
   dates <- inputs
 } else {
-  dates <- "20151102"
+  dates <- "20151125"
 }
 dir <- "stockfiles"
 if (! dir.exists(dir)) dir.create(dir)

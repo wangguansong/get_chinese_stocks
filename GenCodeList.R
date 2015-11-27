@@ -1,6 +1,7 @@
 # Codes:
+# Update: 2015-12-02
 #   ShangHai A Shares     0600000 ~ 0601999
-#                         0603000 ~ 0603998
+#                         0603000 ~ 0603999
 #   ShangHai B Shares     0900901 ~ 0900957
 #   ShangHai Indices      0000001 ~ 0000162
 #                         0000300
@@ -14,7 +15,7 @@
 # list of the codes
 stock.list <-
   c(paste("0", as.character(600000L + 0:1999), sep=""),  # ShangHai A
-    paste("0", as.character(603000L + 0:998), sep=""),
+    paste("0", as.character(603000L + 0:999), sep=""),
     paste("0", as.character(900900L + 1:57), sep=""),    # ShangHai B
     as.character(1000000L + 1:999),     # ShenZhen A
     "1001696", "1001896",
