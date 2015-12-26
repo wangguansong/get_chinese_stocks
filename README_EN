@@ -7,11 +7,22 @@ I only tested in Ubuntu 14.04.
 GetSymbols(HF).netease.R
     Download (intra-)daily prices of a symbol/code, then save to a file
     or load to the parent environment.
+GetSymbolsHF.sina.R
+    Same as above, but using Sina as source.
 CleanSymbols(HF).netease.R
     Clean the downloaded prices.
+CleanSymbolsHF.sina.R
+    Same as above, but for Sina as source.
 GetAllSymbols(HF).R
     A script to automatically download and clean (intra-)daily prices
     of all symbols/codes.
+GetFinancialInfo.netease(sina).R
+    Download financial statements/information from netease or sina.
+GetAllSymbolsFinancialInfo.R
+    A script to automatically download and clean financial statements
+    of all symbols/codes.
+GenCodeList.R
+    Generate a list of codes of all stocks and indices.
 
 EXAMPLE:
 

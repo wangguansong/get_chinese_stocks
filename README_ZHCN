@@ -5,14 +5,25 @@
 
 GetSymbols(HF).netease.R
     下载每日（明细）价格，然后保存在文件或者载入到R空间中。
+GetSymbolsHF.sina.R
+    如上，但从新浪下载数据。
 CleanSymbols(HF).netease.R
     清理下载的数据。
+CleanSymbolsHF.sina.R
+    如上，但为新浪下载的数据清理。
 GetAllSymbols(HF).R
     自动下载所有的股票和指数数据。
+GetFinancialInfo.netease(sina).R
+    从网易或新浪下载财务信息。
+GetAllSymbolsFinancialInfo.R
+    自动下载所有股票的财务信息。
+GenCodeList.R
+    所有股票的代码。
 
 用法例：
 
-  - 下载上证综合指数每日历史价格（从最早日期到今天），保存到csv文件，然后载入到R空间中。
+  - 下载上证综合指数每日历史价格（从最早日期到今天），保存到csv文件，然
+后载入到R空间中。
     以下写法效果相同：
       GetSymbols.netease("0000001")
       GetSymbols.netease("000001", market="Shanghai")
