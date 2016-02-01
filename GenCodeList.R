@@ -1,5 +1,5 @@
 # Codes:
-# Update: 2015-12-02
+# Update: 2016-02-01
 #   ShangHai A Shares     0600000 ~ 0601999
 #                         0603000 ~ 0603999
 #   ShangHai B Shares     0900901 ~ 0900957
@@ -18,9 +18,9 @@ stock.list <-
     paste("0", as.character(603000L + 0:999), sep=""),
     paste("0", as.character(900900L + 1:57), sep=""),    # ShangHai B
     as.character(1000000L + 1:999),     # ShenZhen A
-    "1001696", "1001896",
-    as.character(1002000L + 1:783),
-    as.character(1300000L + 1:498),
+    "1001696", "1001896", "1001979",
+    as.character(1002000L + 1:800),
+    as.character(1300000L + 1:501),
     as.character(1200000L + 2:58),     # ShenZhen B
     "1200152", "1200160", "1200168",
     "1200413", "1200418", "1200429", "1200468", "1200488",

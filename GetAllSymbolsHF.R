@@ -11,29 +11,21 @@
 
 
 ## setup
-source("GetSymbolsHF.netease.R")
-source("CleanSymbolsHF.netease.R")
-source("GenCodeList.R")
+
 inputs <- commandArgs(trailingOnly=TRUE)
 if (length(inputs)==1) {
   dates <- inputs
 } else {
-  dates <- "20151125"
+  dates <- 20160125:20160129
 }
+
+source("GetSymbolsHF.netease.R")
+source("CleanSymbolsHF.netease.R")
+source("GenCodeList.R")
+
 dir <- "stockfiles"
 if (! dir.exists(dir)) dir.create(dir)
 
-# list of the codes
-code.list <-
-  c(paste("0", as.character(600000L + 0:1999), sep=""),  # ShangHai A
-    paste("0", as.character(603000L + 0:3998), sep=""),
-    paste("0", as.character(900900L + 1:57), sep=""),    # ShangHai B
-    substr(as.character(10000000L + c(1:162, 300, 801:999)), 2, 8),
-    # ShangHai Idx
-    as.character(1000000L + 1:2783),     # ShenZhen A
-    as.character(1300000L + 1:498),
-    as.character(1200000L + 11:992),     # ShenZhen B
-    as.character(1399000L + 1:998))      # ShenZhen Idx
 
 
 for (d in dates) {
