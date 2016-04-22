@@ -1,13 +1,13 @@
 # Codes:
-# Update: 2016-02-01
+# Update: 2016-04-22
 #   ShangHai A Shares     0600000 ~ 0601999
 #                         0603000 ~ 0603999
 #   ShangHai B Shares     0900901 ~ 0900957
 #   ShangHai Indices      0000001 ~ 0000162
 #                         0000300
 #                         0000801 ~ 0000999
-#   ShenZhen A Shares     1000001 ~ 1002783
-#                         1300001 ~ 1300498
+#   ShenZhen A Shares     1000001 ~ 1002795
+#                         1300001 ~ 1300511
 #   ShenZhen B Shares     1200011 ~ 1200992
 #   ShenZhen Indices      1399001 ~ 1399998
 
@@ -20,7 +20,7 @@ stock.list <-
     as.character(1000000L + 1:999),     # ShenZhen A
     "1001696", "1001896", "1001979",
     as.character(1002000L + 1:800),
-    as.character(1300000L + 1:501),
+    as.character(1300000L + 1:520),
     as.character(1200000L + 2:58),     # ShenZhen B
     "1200152", "1200160", "1200168",
     "1200413", "1200418", "1200429", "1200468", "1200488",
