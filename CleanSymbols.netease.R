@@ -1,6 +1,7 @@
 CleanSymbols.netease <- function(x, savefile, dfname,
                          translate=FALSE, checktype=TRUE,
-                         checkcode=TRUE, checkdate=TRUE) {
+                         checkcode=TRUE, checkdate=TRUE,
+                         removezero=TRUE) {
   # Clean the csv file of the daily returns of a stock of Shanghai or
   # Shenzhen market.
   # Args:
@@ -65,6 +66,13 @@ CleanSymbols.netease <- function(x, savefile, dfname,
     tempdf[, factorcol] <- sapply(tempdf[, factorcol], as.factor)
   }
 
+  # Remove the rows with zero as TCLOSE.
+  if (removezero) {
+    tclosecol <- which(colnames(tempdf) %in% c("收盘价", "TCLOSE"))
+    tempdf <- tempdf[tempdf[, tclosecol]>0, ]
+    rownames(tempdf) <- 1:nrow(tempdf)
+  }
+
 
   # Change DATE to POSIT format, and sort from old to new
   if (checkdate) {
@@ -74,6 +82,7 @@ CleanSymbols.netease <- function(x, savefile, dfname,
                                      format="%Y-%m-%d")
         tempdf <- tempdf[order(tempdf[, datecol]), ]
         }
+    rownames(tempdf) <- 1:nrow(tempdf)
   }
 
   # Save or Return
