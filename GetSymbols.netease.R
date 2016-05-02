@@ -59,6 +59,11 @@ GetSymbols.netease <- function(code, market, from, to, savefile, dfname,
       stop("Cannot recognize market")
     }
   }
+  # codename is for the name of data frame and file to save.
+  # codenum is for the link to netease.
+  codename <- paste(market, code, sep="")
+  codenum <- paste(ifelse(market=="SH", 0, 1), code, sep="")
+
   if (missing("savefile")) {
     savefile <- paste(codename, ".csv", sep="")
   }
@@ -66,10 +71,6 @@ GetSymbols.netease <- function(code, market, from, to, savefile, dfname,
     dfname <- codename
   }
 
-  # codename is for the name of data frame and file to save.
-  # codenum is for the link to netease.
-  codename <- paste(market, code, sep="")
-  codenum <- paste(ifelse(market=="SH", 0, 1), code, sep="")
 
   # Set default dates
   if (missing("from")) {
@@ -114,7 +115,8 @@ GetSymbols.netease <- function(code, market, from, to, savefile, dfname,
     invisible(codename)
   } else {
     temptable <- read.csv(dltmp, fileEncoding="gb18030",
-                          na.strings=c("None", "NA", ""))
+                          na.strings=c("None", "NA", ""),
+                          stringsAsFactors=FALSE)
     if (translate) {
       colnames(temptable) <- c("DATE", "CODE", "NAME", fields)
     }
